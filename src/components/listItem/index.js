@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
   card: {
     width: 200,
     height: 400
+  },
+  title: {
+    textAlign: 'center'
   }
 }));
 
@@ -25,7 +28,7 @@ function ListItem(props) {
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media} image={'https://image.tmdb.org/t/p/h632' + props.movie.backdrop_path} title={props.movie.title} />
-      <CardContent>
+      <CardContent className={classes.title}>
         { props.movie.title }
       </CardContent>
       <CardActions>

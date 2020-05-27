@@ -19,7 +19,7 @@ export default function Details(prop) {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button color="primary" onClick={handleClickOpen}>
         Learn More
       </Button>
       <Dialog open={open} onClose={handleClose}>

@@ -30,9 +30,37 @@ function Home() {
     fetchMovies()
   }
 
+  const ratingRange = (rating) => {
+    switch(rating) {
+      case 1:
+        return [ 0, 2 ]
+      case 2:
+        return [ 2, 4 ]
+      case 3:
+        return [ 4, 6 ]
+      case 4:
+        return [ 6, 8 ]
+      case 5:
+        return [ 8, 10 ]
+      default:
+        return [ 8, 10 ]
+    }
+
+  }
+
+  const updateRating = (rating) => {
+    if (!rating) return fetchMovies()
+    const [min, max] = ratingRange(rating)
+    setMovies(
+      movies.filter((movie) => {
+        return movie.vote_average >= min && movie.vote_average < max
+      })
+    )
+  }
+
   return (
     <div>
-      <SearchBar searchUpdated={updateSeach} />
+      <SearchBar searchUpdated={updateSeach} ratingUpdated={updateRating} />
       <List movies={movies}/>
     </div>
   )

@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import Rating from '@material-ui/lab/Rating';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
@@ -58,12 +59,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchBar({ searchUpdated }) {
+export default function SearchBar({ searchUpdated, ratingUpdated }) {
   const [search, setSearch] = useState('');
+  const [rating, setRating] = useState(10);
 
   const handleUpdate = (e) => {
     setSearch(e.target.value);
     searchUpdated(e.target.value)
+  }
+
+  const updateRating = (newValue) => {
+    setRating(newValue)
+    ratingUpdated(newValue)
   }
 
   const classes = useStyles();
@@ -73,6 +80,15 @@ export default function SearchBar({ searchUpdated }) {
           <Typography className={classes.title} variant="h6" noWrap>
             Movies
           </Typography>
+          <div>
+            <Rating
+              name="simple-controlled"
+              value={rating}
+              onChange={(event, newValue) => {
+                updateRating(newValue);
+              }}
+            />
+          </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
