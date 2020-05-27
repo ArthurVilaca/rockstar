@@ -14,13 +14,25 @@ function Home() {
       })
   }
 
+  const fetchSearch = async (search) => {
+    Service.get(`https://api.themoviedb.org/3/search/movie?query=${search}`)
+      .then((response) => {
+        setMovies(response.data.results)
+      })
+  }
+
   useEffect(() => {
     fetchMovies();
   }, [])
 
+  const updateSeach = (search) => {
+    if (search !== '') return fetchSearch(search)
+    fetchMovies()
+  }
+
   return (
     <div>
-      <SearchBar />
+      <SearchBar searchUpdated={updateSeach} />
       <List movies={movies}/>
     </div>
   )

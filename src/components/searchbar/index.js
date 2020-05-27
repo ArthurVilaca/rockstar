@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -58,7 +58,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchBar() {
+export default function SearchBar({ searchUpdated }) {
+  const [search, setSearch] = useState('');
+
+  const handleUpdate = (e) => {
+    setSearch(e.target.value);
+    searchUpdated(e.target.value)
+  }
+
   const classes = useStyles();
   return (
     <AppBar position="static">
@@ -71,6 +78,8 @@ export default function SearchBar() {
               <SearchIcon />
             </div>
             <InputBase placeholder="Search..."
+              value={search}
+              onChange={handleUpdate}
               classes={{root: classes.inputRoot, input: classes.inputInput}}
               inputProps={{ 'aria-label': 'search' }}
             />

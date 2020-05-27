@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,7 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function Details(prop) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,13 +22,13 @@ export default function Details(prop) {
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Learn More
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
           { prop.movie.original_title }
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <div> Rating: { prop.movie.vote_average }</div>
+            <div>Rating: { prop.movie.vote_average }</div>
             <div>Votes: { prop.movie.vote_count }</div>
             <div>Release date: { prop.movie.release_date }</div>
             <div>Overview: { prop.movie.overview }</div>
